@@ -7,6 +7,7 @@ import {
   timestamp,
   pgEnum,
   boolean,
+  text,
 } from "drizzle-orm/pg-core";
 
 export const menu = pgTable("menu", {
@@ -14,6 +15,7 @@ export const menu = pgTable("menu", {
   image: varchar("image").notNull(),
   name: varchar("name").notNull(),
   price: integer("price").notNull(),
+  description: varchar("description").notNull(),
 });
 
 export const roleEnum = pgEnum("role", ["user", "admin"]);
@@ -23,6 +25,7 @@ export const users = pgTable("users", {
   image: varchar("image"),
   email: varchar("email").notNull(),
   password: varchar("password").notNull(),
+  contactPhone: integer("phone").notNull(),
   role: roleEnum("role").default("user").notNull(),
 });
 
@@ -49,6 +52,7 @@ export const orderEnum = pgEnum("orderStatus", [
   "ready",
 ]);
 
+export const orderSizeEnum = pgEnum("size", ["large", "small", "medium"]);
 export const orders = pgTable("orders", {
   id: serial("orderId").primaryKey(),
   totalPrice: integer("totalPrice").notNull(),
@@ -57,6 +61,7 @@ export const orders = pgTable("orders", {
     .references(() => users.id, { onDelete: "cascade" }),
   quantity: integer("quantity").notNull(),
   orderStatus: orderEnum("orderStatus").default("pending"),
+  size: orderSizeEnum("size").default("small"),
   priority: boolean("priority"),
   createdAt: timestamp("create_at", { mode: "string" }).defaultNow(),
 });
@@ -68,4 +73,12 @@ export const comments = pgTable("comments", {
     .references(() => users.id, { onDelete: "cascade" }),
   title: varchar("title").notNull(),
   content: varchar("content").notNull(),
+});
+
+export const reviews = pgTable("reviews", {
+  id: serial("reviewId").primaryKey(),
+  userId: integer("userId").references(() => users.id, { onDelete: "cascade" }),
+  content: text("content").notNull(),
+  createdAt: timestamp("createed_at", { mode: "string" }).defaultNow(),
+  rating: integer("rating").notNull(),
 });

@@ -9,10 +9,11 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-
     "forceConsistentCasingInFileNames": true,
     "types": ["node"],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx"
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules/", "dist"]
 }

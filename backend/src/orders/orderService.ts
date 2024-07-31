@@ -1,13 +1,12 @@
 import { eq } from "drizzle-orm";
 import { db } from "../drizzle/db";
-import { orders, TIOrders } from "../drizzle/schema";
+import { orders, TIOrders, TSOrders } from "../drizzle/schema";
 import { Context } from "hono";
 
-export const getAllOrdersService = async () => {
+export const getAllOrdersService = async (): Promise<TSOrders[] | null> => {
   const Orders = await db.query.orders.findMany();
   return Orders;
 };
-
 
 export const getOrderByIdServcice = async (id: number) => {
   const order = await db.query.orders.findFirst({
@@ -15,7 +14,6 @@ export const getOrderByIdServcice = async (id: number) => {
   });
   return order;
 };
-
 
 export const createOrderService = async (order: TIOrders) => {
   const Order = db.insert(orders).values(order);

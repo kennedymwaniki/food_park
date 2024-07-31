@@ -1,1 +1,0 @@
-ALTER TABLE "reviews" RENAME COLUMN "createed_at" TO "created_at";

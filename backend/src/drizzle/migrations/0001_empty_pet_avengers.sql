@@ -1,0 +1,1 @@
+ALTER TABLE "reservations" RENAME COLUMN "reservationDate" TO "reservationdate";

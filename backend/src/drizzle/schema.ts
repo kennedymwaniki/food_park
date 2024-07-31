@@ -23,7 +23,8 @@ export const roleEnum = pgEnum("role", ["user", "admin"]);
 
 export const users = pgTable("users", {
   id: serial("user_id").primaryKey(),
-  image: varchar("image"),
+  fullname: varchar("fullname"),
+  image: varchar("image", { length: 256 }),
   email: varchar("email").notNull(),
   password: varchar("password").notNull(),
   contactPhone: integer("phone").notNull(),
@@ -33,6 +34,9 @@ export const users = pgTable("users", {
 export const addressEnum = pgEnum("addressType", ["home", "office"]);
 export const address = pgTable("address", {
   id: serial("addressId").primaryKey(),
+  user_id: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
   house: varchar("house").notNull(),
   street: varchar("street").notNull(),
   city: varchar("city").notNull(),
@@ -78,10 +82,24 @@ export const comments = pgTable("comments", {
 
 export const reviews = pgTable("reviews", {
   id: serial("reviewId").primaryKey(),
-  user_id: integer("user_id").references(() => users.id, { onDelete: "cascade" }),
+  user_id: integer("user_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
   content: text("content").notNull(),
   created_at: date("created_at", { mode: "string" }).defaultNow(),
   rating: integer("rating").notNull(),
+});
+
+export const drinks = pgEnum("drinktype", ["hard drinks", "soft drinks"]);
+export const reservations = pgTable("reservations", {
+  id: serial("reservationId").primaryKey(),
+  user_id: integer("user_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
+  date: date("reservationdate", { mode: "string" }).notNull(),
+  guests: integer("guests").notNull(),
+  drinks: drinks("drinks").default("soft drinks").notNull(),
+  special: boolean("special_ocassion").notNull(),
 });
 
 //! types for all tables tables
@@ -108,6 +126,50 @@ export type TIAddress = typeof address.$inferInsert;
 
 //! end of types
 
-export const UserCommentRelations = relations(users, ({ many }) => ({
+export const UserRelations = relations(users, ({ many }) => ({
+  reservations: many(reservations),
+  orders: many(orders),
+  reviews: many(reviews),
   comments: many(comments),
+  address: many(address),
+}));
+
+// Define the relationships for the reservations table
+export const ReservationRelations = relations(reservations, ({ one }) => ({
+  user: one(users, {
+    fields: [reservations.user_id],
+    references: [users.id],
+  }),
+}));
+
+// Define the relationships for the orders table
+export const OrderRelations = relations(orders, ({ one }) => ({
+  user: one(users, {
+    fields: [orders.user_id],
+    references: [users.id],
+  }),
+}));
+
+// Define the relationships for the reviews table
+export const ReviewRelations = relations(reviews, ({ one }) => ({
+  user: one(users, {
+    fields: [reviews.user_id],
+    references: [users.id],
+  }),
+}));
+
+// Define the relationships for the comments table
+export const CommentRelations = relations(comments, ({ one }) => ({
+  user: one(users, {
+    fields: [comments.user_id],
+    references: [users.id],
+  }),
+}));
+
+// Define the relationships for the address table
+export const AddressRelations = relations(address, ({ one }) => ({
+  user: one(users, {
+    fields: [address.user_id],
+    references: [users.id],
+  }),
 }));

@@ -1,5 +1,5 @@
 {
-  "id": "2ae36667-5e70-4d23-ba15-ed2b6c889dec",
+  "id": "676730b2-05a5-4e66-ae00-5d86f825e12d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -12,6 +12,12 @@
           "name": "addressId",
           "type": "serial",
           "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
           "notNull": true
         },
         "house": {
@@ -42,7 +48,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "address_user_id_users_user_id_fk": {
+          "name": "address_user_id_users_user_id_fk",
+          "tableFrom": "address",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -56,8 +76,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -77,15 +97,15 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "comments_userId_users_userId_fk": {
-          "name": "comments_userId_users_userId_fk",
+        "comments_user_id_users_user_id_fk": {
+          "name": "comments_user_id_users_user_id_fk",
           "tableFrom": "comments",
           "tableTo": "users",
           "columnsFrom": [
-            "userId"
+            "user_id"
           ],
           "columnsTo": [
-            "userId"
+            "user_id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -121,6 +141,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -138,14 +164,14 @@
           "primaryKey": true,
           "notNull": true
         },
-        "totalPrice": {
-          "name": "totalPrice",
+        "total_price": {
+          "name": "total_price",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -156,13 +182,21 @@
           "primaryKey": false,
           "notNull": true
         },
-        "orderStatus": {
-          "name": "orderStatus",
+        "order_status": {
+          "name": "order_status",
           "type": "orderStatus",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": false,
           "default": "'pending'"
+        },
+        "size": {
+          "name": "size",
+          "type": "size",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'small'"
         },
         "priority": {
           "name": "priority",
@@ -170,8 +204,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "create_at": {
-          "name": "create_at",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false,
@@ -180,15 +214,132 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "orders_userId_users_userId_fk": {
-          "name": "orders_userId_users_userId_fk",
+        "orders_user_id_users_user_id_fk": {
+          "name": "orders_user_id_users_user_id_fk",
           "tableFrom": "orders",
           "tableTo": "users",
           "columnsFrom": [
-            "userId"
+            "user_id"
           ],
           "columnsTo": [
-            "userId"
+            "user_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.reservations": {
+      "name": "reservations",
+      "schema": "",
+      "columns": {
+        "reservationId": {
+          "name": "reservationId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reservationDate": {
+          "name": "reservationDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "guests": {
+          "name": "guests",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "drinks": {
+          "name": "drinks",
+          "type": "drinktype",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'soft drinks'"
+        },
+        "special_ocassion": {
+          "name": "special_ocassion",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "reservations_user_id_users_user_id_fk": {
+          "name": "reservations_user_id_users_user_id_fk",
+          "tableFrom": "reservations",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.reviews": {
+      "name": "reviews",
+      "schema": "",
+      "columns": {
+        "reviewId": {
+          "name": "reviewId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "rating": {
+          "name": "rating",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "reviews_user_id_users_user_id_fk": {
+          "name": "reviews_user_id_users_user_id_fk",
+          "tableFrom": "reviews",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -201,15 +352,21 @@
       "name": "users",
       "schema": "",
       "columns": {
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "serial",
           "primaryKey": true,
           "notNull": true
         },
+        "fullname": {
+          "name": "fullname",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
         "image": {
           "name": "image",
-          "type": "varchar",
+          "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
         },
@@ -222,6 +379,12 @@
         "password": {
           "name": "password",
           "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone": {
+          "name": "phone",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -249,17 +412,17 @@
           "primaryKey": true,
           "notNull": true
         },
-        "voucherCode": {
-          "name": "voucherCode",
+        "voucher_code": {
+          "name": "voucher_code",
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
         },
-        "validPeriod": {
-          "name": "validPeriod",
+        "valid_period": {
+          "name": "valid_period",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "status": {
           "name": "status",
@@ -282,7 +445,15 @@
       "schema": "public",
       "values": [
         "home",
-        "offiice"
+        "office"
+      ]
+    },
+    "public.drinktype": {
+      "name": "drinktype",
+      "schema": "public",
+      "values": [
+        "hard drinks",
+        "soft drinks"
       ]
     },
     "public.orderStatus": {
@@ -292,6 +463,15 @@
         "pending",
         "confirmed",
         "ready"
+      ]
+    },
+    "public.size": {
+      "name": "size",
+      "schema": "public",
+      "values": [
+        "large",
+        "small",
+        "medium"
       ]
     },
     "public.role": {

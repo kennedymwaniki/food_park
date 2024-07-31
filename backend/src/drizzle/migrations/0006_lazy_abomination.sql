@@ -1,0 +1,1 @@
+ALTER TYPE "addressType" ADD VALUE 'office';

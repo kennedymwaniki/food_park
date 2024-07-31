@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   pgTable,
   serial,
@@ -21,7 +22,7 @@ export const menu = pgTable("menu", {
 export const roleEnum = pgEnum("role", ["user", "admin"]);
 
 export const users = pgTable("users", {
-  id: serial("userId").primaryKey(),
+  id: serial("user_id").primaryKey(),
   image: varchar("image"),
   email: varchar("email").notNull(),
   password: varchar("password").notNull(),
@@ -29,7 +30,7 @@ export const users = pgTable("users", {
   role: roleEnum("role").default("user").notNull(),
 });
 
-export const addressEnum = pgEnum("addressType", ["home", "offiice"]);
+export const addressEnum = pgEnum("addressType", ["home", "office"]);
 export const address = pgTable("address", {
   id: serial("addressId").primaryKey(),
   house: varchar("house").notNull(),
@@ -41,8 +42,8 @@ export const address = pgTable("address", {
 export const validityEnum = pgEnum("valid", ["unused", "used"]);
 export const vouchers = pgTable("vouchers", {
   id: serial("voucherId").primaryKey(),
-  code: varchar("voucherCode").notNull(),
-  validity: integer("validPeriod"),
+  code: varchar("voucher_code").notNull(),
+  validity: integer("valid_period").notNull(),
   status: validityEnum("status").default("unused"),
 });
 
@@ -55,20 +56,20 @@ export const orderEnum = pgEnum("orderStatus", [
 export const orderSizeEnum = pgEnum("size", ["large", "small", "medium"]);
 export const orders = pgTable("orders", {
   id: serial("orderId").primaryKey(),
-  totalPrice: integer("totalPrice").notNull(),
-  userId: integer("userId")
+  total_price: integer("total_price").notNull(),
+  user_id: integer("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   quantity: integer("quantity").notNull(),
-  orderStatus: orderEnum("orderStatus").default("pending"),
+  order_status: orderEnum("order_status").default("pending"),
   size: orderSizeEnum("size").default("small"),
   priority: boolean("priority"),
-  createdAt: timestamp("create_at", { mode: "string" }).defaultNow(),
+  created_at: timestamp("created_at", { mode: "string" }).defaultNow(),
 });
 
 export const comments = pgTable("comments", {
   id: serial("commentId").primaryKey(),
-  userId: integer("userId")
+  user_id: integer("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   title: varchar("title").notNull(),
@@ -77,8 +78,36 @@ export const comments = pgTable("comments", {
 
 export const reviews = pgTable("reviews", {
   id: serial("reviewId").primaryKey(),
-  userId: integer("userId").references(() => users.id, { onDelete: "cascade" }),
+  user_id: integer("user_id").references(() => users.id, { onDelete: "cascade" }),
   content: text("content").notNull(),
-  createdAt: timestamp("createed_at", { mode: "string" }).defaultNow(),
+  created_at: date("created_at", { mode: "string" }).defaultNow(),
   rating: integer("rating").notNull(),
 });
+
+//! types for all tables tables
+export type TIUser = typeof users.$inferInsert;
+export type TSUser = typeof users.$inferSelect;
+
+export type TIMenu = typeof menu.$inferInsert;
+export type TSMenu = typeof menu.$inferSelect;
+
+export type TSReviews = typeof reviews.$inferSelect;
+export type TIReviews = typeof reviews.$inferInsert;
+
+export type TSComments = typeof comments.$inferSelect;
+export type TIComments = typeof comments.$inferInsert;
+
+export type TSOrders = typeof orders.$inferSelect;
+export type TIOrders = typeof orders.$inferInsert;
+
+export type TSVoucher = typeof vouchers.$inferSelect;
+export type TIVouchers = typeof vouchers.$inferInsert;
+
+export type TSAddress = typeof address.$inferSelect;
+export type TIAddress = typeof address.$inferInsert;
+
+//! end of types
+
+export const UserCommentRelations = relations(users, ({ many }) => ({
+  comments: many(comments),
+}));

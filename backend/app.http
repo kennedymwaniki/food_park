@@ -12,3 +12,19 @@ GET http://localhost:3000/api/users
 GET http://localhost:3000/api/user/2
 ###
 GET http://localhost:3000/api/userRelations/2
+
+///reservations
+###
+GET http://localhost:3000/api/reservations
+
+//!*reviwes
+###
+GET http://localhost:3000/api/reviews
+
+//comments
+###
+GET http://localhost:3000/api/comments
+
+//menu
+###
+GET http://localhost:3000/api/menu

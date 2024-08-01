@@ -15,6 +15,13 @@
       "when": 1722453998233,
       "tag": "0001_empty_pet_avengers",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1722494663814,
+      "tag": "0002_flippant_winter_soldier",
+      "breakpoints": true
     }
   ]
 }

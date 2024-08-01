@@ -28,3 +28,29 @@ GET http://localhost:3000/api/comments
 //menu
 ###
 GET http://localhost:3000/api/menu
+
+
+// registration
+###
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "fullname": "John Doe",
+    "image": "user1.jpg",
+    "email": "johndoe@gmail.com",
+    "password": "hashedpassword1",
+    "phone": 1234567890,
+    "role": "user"
+}
+
+
+//login
+###
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "johndoe@gmail.com",
+    "password": "hashedpassword1"
+}

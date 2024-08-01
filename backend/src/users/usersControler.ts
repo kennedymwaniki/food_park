@@ -1,14 +1,14 @@
 import { Context } from "hono";
-import { getAllOrdersService } from "../orders/orderService";
 import {
   createUserService,
   deletUserService,
   getAllUserRelationsService,
   getUserService,
+  getUsersService,
 } from "./usersService";
 
 export const getUsers = async (c: Context) => {
-  const users = await getAllOrdersService();
+  const users = await getUsersService();
   return c.json(users);
 };
 

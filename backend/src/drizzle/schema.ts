@@ -25,7 +25,7 @@ export const users = pgTable("users", {
   id: serial("user_id").primaryKey(),
   fullname: varchar("fullname"),
   image: varchar("image", { length: 256 }),
-  email: varchar("email").notNull(),
+  email: varchar("email").notNull().unique(),
   password: varchar("password").notNull(),
   contactPhone: integer("phone").notNull(),
   role: roleEnum("role").default("user").notNull(),
@@ -111,6 +111,9 @@ export type TSMenu = typeof menu.$inferSelect;
 
 export type TSReviews = typeof reviews.$inferSelect;
 export type TIReviews = typeof reviews.$inferInsert;
+
+export type TIReservations = typeof reservations.$inferInsert;
+export type TSReservations = typeof reservations.$inferSelect;
 
 export type TSComments = typeof comments.$inferSelect;
 export type TIComments = typeof comments.$inferInsert;

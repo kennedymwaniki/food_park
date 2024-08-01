@@ -1,9 +1,7 @@
-import { address } from "./../drizzle/schema";
-import { Column, eq } from "drizzle-orm";
+import {  eq } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { TIUser, TSUser, users } from "../drizzle/schema";
-import { date } from "drizzle-orm/mysql-core";
-eq;
+
 export const getUsersService = async (): Promise<TSUser[] | null> => {
   const users = await db.query.users.findMany();
   return users;

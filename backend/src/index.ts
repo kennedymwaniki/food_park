@@ -9,6 +9,7 @@ import { menuRouter } from "./menus/menuRouter";
 import { vouchersRouter } from "./vouchers/voucherRouter";
 import { addressRouter } from "./address/addressRouter";
 import { commentsRouter } from "./comments/commentRouter";
+import { authRouter } from "./auth/authRouter";
 
 //! remember
 //TODO : CHECK THE EXISTENCE OF AN ITEM BEFORE YOU CREATE IT
@@ -28,6 +29,7 @@ app.route("/api", menuRouter);
 app.route("/api", vouchersRouter);
 app.route("/api", addressRouter);
 app.route("/api", commentsRouter);
+app.route("/api/auth", authRouter);
 
 const port = 3000;
 console.log(`Server is running on port ${port}`);

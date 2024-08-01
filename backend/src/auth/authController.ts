@@ -8,14 +8,6 @@ export const registerUser = async (c: Context) => {
     const user = await c.req.json();
     console.log("Authcontroller register user is:", user);
 
-    // // Get and hash the user password
-    const hashedPassword = await bcrypt.hash(user.password, 10);
-    user.password = hashedPassword;
-    console.log(
-      "this is the hashed users password in register controller",
-      user.password
-    );
-
     const createdUser = await registerAuthService(user);
     console.log(`the created user in the AuthController is:`, user);
     if (!createdUser) return c.text("User not created", 404);

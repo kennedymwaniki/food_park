@@ -1,5 +1,5 @@
 import { TUser } from "../../types/types";
-import usersAPI from "./usersAPI";
+import usersAPI from "../../apis/usersAPI";
 
 const UsersTable = () => {
   const { data, error, isLoading } = usersAPI.useGetUsersQuery();

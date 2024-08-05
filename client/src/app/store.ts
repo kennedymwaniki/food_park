@@ -2,7 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import usersAPI from "../features/users/usersAPI";
+import usersAPI from "../apis/usersAPI";
+import vouchersAPI from "../apis/couponsAPI";
 
 // Persist configuration
 const persistConfig = {
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   [usersAPI.reducerPath]: usersAPI.reducer,
+  [vouchersAPI.reducerPath]: vouchersAPI.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -23,7 +25,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: ["persist/PERSIST"],
       },
-    }).concat(usersAPI.middleware),
+    }).concat(usersAPI.middleware, vouchersAPI.middleware),
 });
 
 export const persistor = persistStore(store);

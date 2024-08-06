@@ -1,9 +1,10 @@
 import UsersTable from "./features/users/usersTable";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   return (
     <div>
-      <h1>Welcome to the App</h1>
+      <HomePage />
       <UsersTable />
     </div>
   );

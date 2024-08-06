@@ -4,9 +4,9 @@ import { FaShoppingBasket } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 const NavBar = () => {
   return (
-    <div className="flex justify-between items-center text-orange-500 pl-4 shadow-xl sticky">
+    <div className="flex justify-between items-center text-orange-500 pl-4 shadow-2xl border">
       <div className="logo">
-        <img src={logo} alt="" height={500} width={200} />
+        <img src={logo} alt="" height={40} width={200} />
       </div>
       <nav className="m-4 max-sm:hidden">
         <ul className="flex justify-between gap-4 font-bold">

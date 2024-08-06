@@ -13,8 +13,8 @@ const Hero = () => {
       }}
       className="relative h-screen w-full"
     >
-      <div className="absolute inset-0 bg-white opacity-80"></div>
-      <div className="relative z-10 flex items-center justify-center h-full">
+      <div className="absolute inset-0 bg-white opacity-70"></div>
+      <div className="relative z-10 flex items-center justify-center h-screen">
         <HeroCarousel />
       </div>
     </div>

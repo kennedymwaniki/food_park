@@ -13,3 +13,10 @@ export interface TVouchers {
   validity: number;
   status: string;
 }
+export interface TReservations {
+  user_id: number;
+  date: string;
+  guests: number;
+  drinks: string;
+  special: boolean;
+}

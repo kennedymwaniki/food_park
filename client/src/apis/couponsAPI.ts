@@ -23,6 +23,14 @@ export const vouchersAPI = createApi({
       }),
       invalidatesTags: ["getVouchers"],
     }),
+    updateVoucher: builder.mutation<TVouchers, Partial<TVouchers>>({
+      query: ({ id, ...rest }) => ({
+        url: "vouchers/${id}",
+        method: "PUT",
+        body: rest,
+      }),
+      invalidatesTags: ["getVouchers"],
+    }),
     deleteVoucher: builder.mutation<{ success: boolean; id: number }, number>({
       query: (id) => ({
         method: "DELETE",

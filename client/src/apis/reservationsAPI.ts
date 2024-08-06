@@ -35,3 +35,5 @@ export const reservationsAPI = createApi({
     }),
   }),
 });
+
+export default reservationsAPI;

@@ -6,7 +6,6 @@ import usersAPI from "../apis/usersAPI";
 import vouchersAPI from "../apis/couponsAPI";
 import reservationsAPI from "../apis/reservationsAPI";
 import cartSlice from "../features/cart/CartSlice";
-import { CartState } from "../features/cart/CartSlice";
 
 // Persist configuration
 const persistConfig = {

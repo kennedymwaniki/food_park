@@ -4,6 +4,7 @@ import menu3 from "../../assets/images/menu2_img_3.jpg";
 import menu4 from "../../assets/images/menu2_img_4.jpg";
 import menu5 from "../../assets/images/menu2_img_5.jpg";
 import menu6 from "../../assets/images/menu2_img_6.jpg";
+import menu7 from "../../assets/images/menu2_img_7.jpg";
 import MenuItem from "./MenuItem";
 
 const menuData = [
@@ -56,6 +57,14 @@ const menuData = [
     rating: 4,
     reviews: 514,
     image: menu6,
+  },
+  {
+    title: "Italian Pasta",
+    category: "Pasta",
+    price: "$70.00",
+    rating: 4,
+    reviews: 514,
+    image: menu7,
   },
 ];
 

@@ -20,3 +20,14 @@ export interface TReservations {
   drinks: string;
   special: boolean;
 }
+
+export interface TOrders {
+  id: number;
+  total_price: number;
+  user_id: number;
+  order_number: string;
+  quantity: number;
+  order_status: number;
+  size: "medium" | "large" | "small";
+  priority: boolean;
+}

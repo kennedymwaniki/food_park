@@ -48,6 +48,7 @@ export const vouchers = pgTable("vouchers", {
   id: serial("voucherId").primaryKey(),
   code: varchar("voucher_code").notNull(),
   validity: integer("valid_period").notNull(),
+  discount: integer("discount"),
   status: validityEnum("status").default("unused"),
 });
 
@@ -64,6 +65,7 @@ export const orders = pgTable("orders", {
   user_id: integer("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
+  order_number: varchar("order_number"),
   quantity: integer("quantity").notNull(),
   order_status: orderEnum("order_status").default("pending"),
   size: orderSizeEnum("size").default("small"),

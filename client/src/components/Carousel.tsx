@@ -60,7 +60,7 @@ const HeroCarousel = () => {
                   <img
                     src={slide.image}
                     alt={slide.title}
-                    className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] object-cover rounded-full"
+                    className="w-[300px] h-[200px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] object-cover rounded-full"
                   />
                   <div className="absolute top-5 right-5 sm:top-10 sm:right-10 bg-orange-500 text-white font-bold px-3 py-1 sm:px-4 sm:py-2 rounded-full text-lg sm:text-2xl">
                     {slide.discount}

@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <div className="flex justify-between items-center text-orange-500 pl-4 shadow-2xl border">
       <div className="logo">
-        <img src={logo} alt="" height={40} width={200} />
+        <img src={logo} alt="" height={50} width={200} />
       </div>
       <nav className="m-4 max-sm:hidden">
         <ul className="flex justify-between gap-4 font-bold">
@@ -17,7 +17,7 @@ const NavBar = () => {
           <li>Contact</li>
         </ul>
       </nav>
-      <section className="justify-between p-4 space-x-4">
+      <section className="justify-between p-4 space-x-4 max-sm:hidden">
         <button>
           <FaShoppingBasket />
         </button>
@@ -31,7 +31,7 @@ const NavBar = () => {
       </section>
       <div>
         <button className="hidden max-sm:block">
-          <img src={hamburger} alt="" height={60} width={60} />
+          <img src={hamburger} alt="" height={10} width={30} />
         </button>
       </div>
     </div>

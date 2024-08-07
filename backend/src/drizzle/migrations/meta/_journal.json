@@ -22,6 +22,13 @@
       "when": 1722494663814,
       "tag": "0002_flippant_winter_soldier",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1723013907251,
+      "tag": "0003_complete_mentallo",
+      "breakpoints": true
     }
   ]
 }

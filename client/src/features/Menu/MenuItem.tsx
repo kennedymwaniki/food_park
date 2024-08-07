@@ -26,7 +26,7 @@ const MenuItem = ({
   image,
 }: MenuItemProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 mt-8">
       <div className="relative">
         <img src={image} alt={title} className="w-full h-48 object-cover" />
         <span className="absolute top-2 left-2 bg-orange-500 text-white text-sm px-2 py-1 rounded-full">

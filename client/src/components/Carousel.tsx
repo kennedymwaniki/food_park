@@ -52,7 +52,7 @@ const HeroCarousel = () => {
         {carouselData.map((slide, index) => (
           <div
             key={index}
-            className="min-w-full h-screen flex items-center justify-center md:px-20"
+            className="min-w-full h-screen flex items-center justify-center md:px-20 sm:mb-8 sm:p-8"
           >
             <div className="flex flex-col md:flex-row items-center justify-between w-full gap-1 md:gap-0">
               <div className="w-full md:w-1/2 pr-0 md:pr-10 flex justify-center md:justify-end">
@@ -60,7 +60,7 @@ const HeroCarousel = () => {
                   <img
                     src={slide.image}
                     alt={slide.title}
-                    className="w-[300px] h-[200px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] object-cover rounded-full"
+                    className="w-[300px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[300px] md:h-[300px] object-cover rounded-full"
                   />
                   <div className="absolute top-5 right-5 sm:top-10 sm:right-10 bg-orange-500 text-white font-bold px-3 py-1 sm:px-4 sm:py-2 rounded-full text-lg sm:text-2xl">
                     {slide.discount}

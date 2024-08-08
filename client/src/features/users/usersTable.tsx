@@ -3,6 +3,7 @@ import usersAPI from "../../apis/usersAPI";
 
 const UsersTable = () => {
   const { data, error, isLoading } = usersAPI.useGetUsersQuery();
+  console.table(data);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.toString()}</div>;

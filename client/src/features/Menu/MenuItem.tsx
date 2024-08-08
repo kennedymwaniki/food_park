@@ -5,26 +5,47 @@ import {
   FaStar,
   FaStarHalfAlt,
 } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addItem } from "../cart/CartSlice";
 
 interface MenuItemProps {
+  id: number;
   title: string;
   category: string;
-  price: string;
-  discount?: string;
+  price: number;
+  discount?: number;
   rating: number;
   reviews: number;
+  quantity: number | undefined;
   image: string;
 }
 
 const MenuItem = ({
+  id,
   title,
   category,
+  quantity = 1,
   price,
   discount,
   rating,
   reviews,
   image,
 }: MenuItemProps) => {
+  const dispatch = useDispatch();
+  let totalprice = Number(price * quantity);
+  function handleAddToCart() {
+    console.log("You clicked item of this id:", id);
+    const newOrder = {
+      id,
+      image,
+      price,
+      title,
+      quantity: 1,
+      totalprice,
+    };
+    dispatch(addItem(newOrder));
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 mt-8">
       <div className="relative">
@@ -64,7 +85,10 @@ const MenuItem = ({
           </div>
         </div>
         <div className="flex justify-between items-center mt-4">
-          <button className="bg-orange-500 text-white rounded-full px-4 py-2 hover:bg-orange-600">
+          <button
+            className="bg-orange-500 text-white rounded-full px-4 py-2 hover:bg-orange-600"
+            onClick={handleAddToCart}
+          >
             <FaShoppingCart />
           </button>
           <button className="bg-gray-200 text-gray-600 rounded-full px-4 py-2 hover:bg-gray-300">

@@ -44,7 +44,7 @@ const HeroCarousel = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center py-2 md:py-4">
+    <div className="relative w-screen h-full flex items-center justify-center py-2 md:py-4">
       <div
         className="flex transition-transform duration-1000 w-full h-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}

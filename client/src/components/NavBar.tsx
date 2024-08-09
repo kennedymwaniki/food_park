@@ -6,7 +6,8 @@ import { getCart } from "../features/cart/CartSlice";
 import { useSelector } from "react-redux";
 
 const NavBar = () => {
-  const cart = useSelector(getCart)
+  const cart = useSelector(getCart);
+  console.log(cart);
   return (
     <div className="flex justify-between items-center text-orange-500 pl-4 shadow-2xl border">
       <div className="logo">

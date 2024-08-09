@@ -13,12 +13,8 @@ const Cart = () => {
   // const clear = useSelector(clearCart);
   const dispatch = useDispatch();
   const response = couponsAPI.useGetVoucherByCodeQuery({ code });
-  // const { data, error } = couponsAPI.useGetVoucherByCodeQuery(
-  //   { code },
-  //   {
-  //     skip: !code,
-  //   }
-  // );
+  const Code = code.toString().toUpperCase();
+
   const handleApplyCoupon = () => {
     setApplying(true);
     try {
@@ -32,10 +28,16 @@ const Cart = () => {
         return;
       }
       console.log(response);
-      if (response.status === "fulfilled") {
+      if (response.isSuccess) {
         toast.success("coupon found");
-      } else {
-        toast.error(`${response?.error?.data}`);
+      } else if (response.isError) {
+        const error = response.error;
+
+        if ("data" in error) {
+          toast.error(error.data as string);
+        } else {
+          toast.error("An unexpected error occurred.");
+        }
       }
     } catch (error: any) {
       toast.error(`${error.message}`);
@@ -107,7 +109,7 @@ const Cart = () => {
             <div className="my-4">
               <input
                 type="text"
-                value={code}
+                value={Code}
                 placeholder="Coupon Code"
                 className="w-full p-3 border rounded-lg"
                 onChange={(e) => setCode(e.target.value)}

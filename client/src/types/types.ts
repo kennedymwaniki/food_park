@@ -31,3 +31,7 @@ export interface TOrders {
   size: "medium" | "large" | "small";
   priority: boolean;
 }
+
+export interface TCode {
+  code: string;
+}

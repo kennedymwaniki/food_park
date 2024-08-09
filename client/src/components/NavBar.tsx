@@ -2,7 +2,11 @@ import logo from "../assets/images/logo.png";
 import hamburger from "../assets/icons/hamburger.svg";
 import { FaShoppingBasket } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
+import { getCart } from "../features/cart/CartSlice";
+import { useSelector } from "react-redux";
+
 const NavBar = () => {
+  const cart = useSelector(getCart)
   return (
     <div className="flex justify-between items-center text-orange-500 pl-4 shadow-2xl border">
       <div className="logo">

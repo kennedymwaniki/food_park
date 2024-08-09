@@ -32,6 +32,19 @@ GET http://localhost:3000/api/menu
 
 ###
 GET http://localhost:3000/api/vouchers
+###
+GET http://localhost:3000/api/vouchers/2
+
+//single Voucher
+###
+# GET http://localhost:3000/api/vouchers/voucher?VOUCHER2
+POST http://localhost:3000/api/vouchers/voucher
+Content-Type: application/json
+
+{
+    "code": "VOUCHER2"
+}
+
 
 
 // registration

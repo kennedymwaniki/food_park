@@ -1,4 +1,4 @@
-import { TVouchers } from "./../types/types";
+import { TCode, TVouchers } from "./../types/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const vouchersAPI = createApi({
@@ -19,7 +19,7 @@ export const vouchersAPI = createApi({
         method: "POST",
         url: "vouchers",
         body: voucher,
-        providesTags: ["createVoucher"],
+        // providesTags: ["createVoucher"],
       }),
       invalidatesTags: ["getVouchers"],
     }),
@@ -38,6 +38,14 @@ export const vouchersAPI = createApi({
         providesTags: ["deletVoucher"],
       }),
       invalidatesTags: ["getVouchers"],
+    }),
+    getVoucherByCode: builder.query<TVouchers, TCode>({
+      query: (code) => ({
+        method: "POST",
+        url: "vouchers/voucher",
+        body: code,
+        providesTags: ["getVoucherByCode"],
+      }),
     }),
   }),
 });

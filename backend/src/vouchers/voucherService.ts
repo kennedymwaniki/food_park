@@ -19,7 +19,10 @@ export const createVoucherService = async (voucherItem: TIVouchers) => {
   return newVoucher;
 };
 
-export const updateVoucherService = async (id: number, voucherItem: TIVouchers) => {
+export const updateVoucherService = async (
+  id: number,
+  voucherItem: TIVouchers
+) => {
   const updatedVoucher = await db
     .update(vouchers)
     .set(voucherItem)
@@ -30,4 +33,11 @@ export const updateVoucherService = async (id: number, voucherItem: TIVouchers) 
 export const deleteVoucherService = async (id: number) => {
   await db.delete(vouchers).where(eq(vouchers.id, id));
   return "Voucher successfully deleted";
+};
+
+export const getVoucherByCodeService = async (code: string) => {
+  const voucher = await db.query.vouchers.findFirst({
+    where: eq(vouchers.code, code),
+  });
+  return voucher;
 };

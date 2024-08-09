@@ -82,7 +82,7 @@ export const deleteVoucher = async (c: Context) => {
 export const getVoucherCode = async (c: Context) => {
   try {
     //1 receive code
-    const code = await c.req.json();
+    const { code } = await c.req.json();
     //2 check if code exists
     const voucher = await getVoucherByCodeService(code);
     if (!voucher) return c.text("Such a voucher does not exist");

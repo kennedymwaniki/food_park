@@ -12,17 +12,15 @@ const Cart = () => {
   const cart = useSelector(getCart);
   // const clear = useSelector(clearCart);
   const dispatch = useDispatch();
-  const { data, error } = couponsAPI.useGetVoucherByCodeQuery(
-    { code },
-    {
-      skip: !code,
-    }
-  );
-  console.log(data);
-
-  const handleCoupon = () => {
+  const response = couponsAPI.useGetVoucherByCodeQuery({ code });
+  // const { data, error } = couponsAPI.useGetVoucherByCodeQuery(
+  //   { code },
+  //   {
+  //     skip: !code,
+  //   }
+  // );
+  const handleApplyCoupon = () => {
     setApplying(true);
-
     try {
       if (!code || code === "") {
         toast.error("Please enter a coupon code");
@@ -33,20 +31,14 @@ const Cart = () => {
         toast.error("Coupon code must be at least 5 characters");
         return;
       }
-
-      if (error) {
-        toast.error("Failed to apply coupon");
-        return;
-      }
-
-      if (data && data.code) {
-        console.log(data);
-        toast.success("Coupon successfully applied");
+      console.log(response);
+      if (response.status === "fulfilled") {
+        toast.success("coupon found");
       } else {
-        toast.error("Invalid coupon code");
+        toast.error(`${response?.error?.data}`);
       }
-    } catch (err) {
-      toast.error("An unexpected error occurred");
+    } catch (error: any) {
+      toast.error(`${error.message}`);
     } finally {
       setApplying(false);
     }
@@ -122,7 +114,7 @@ const Cart = () => {
               />
               <button
                 className="w-full mt-2 bg-orange-500 text-white py-2 rounded-lg"
-                onClick={handleCoupon}
+                onClick={handleApplyCoupon}
               >
                 {applying ? "Hold on....." : "Apply"}
               </button>

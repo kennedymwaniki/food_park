@@ -34,10 +34,10 @@ const Cart = () => {
         return;
       }
 
-      // if (error) {
-      //   toast.error("Failed to apply coupon");
-      //   return;
-      // }
+      if (error) {
+        toast.error("Failed to apply coupon");
+        return;
+      }
 
       if (data && data.code) {
         console.log(data);

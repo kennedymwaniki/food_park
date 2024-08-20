@@ -25,7 +25,7 @@ export const vouchersAPI = createApi({
     }),
     updateVoucher: builder.mutation<TVouchers, Partial<TVouchers>>({
       query: ({ id, ...rest }) => ({
-        url: "vouchers/${id}",
+        url: `vouchers/${id}`,
         method: "PUT",
         body: rest,
       }),

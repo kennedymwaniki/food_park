@@ -5,8 +5,9 @@ import {
   FaStar,
   FaStarHalfAlt,
 } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { addItem } from "../cart/CartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, getCurrentItemById } from "../cart/CartSlice";
+import UpdateQuantity from "../../components/updateQuantity";
 
 interface MenuItemProps {
   id: number;
@@ -33,6 +34,11 @@ const MenuItem = ({
 }: MenuItemProps) => {
   const dispatch = useDispatch();
   let totalprice = Number(price * quantity);
+
+  const currentquantity = useSelector(getCurrentItemById(id));
+
+  const isInCart = currentquantity > 0;
+
   function handleAddToCart() {
     console.log("You clicked item of this id:", id);
     const newOrder = {
@@ -85,12 +91,16 @@ const MenuItem = ({
           </div>
         </div>
         <div className="flex justify-between items-center mt-4">
-          <button
-            className="bg-orange-500 text-white rounded-full px-4 py-2 hover:bg-orange-600"
-            onClick={handleAddToCart}
-          >
-            <FaShoppingCart />
-          </button>
+          {!isInCart ? (
+            <button
+              className="bg-orange-500 text-white rounded-full px-4 py-2 hover:bg-orange-600"
+              onClick={handleAddToCart}
+            >
+              <FaShoppingCart />
+            </button>
+          ) : (
+            <UpdateQuantity id={id} currentquantity={currentquantity} />
+          )}
           <button className="bg-gray-200 text-gray-600 rounded-full px-4 py-2 hover:bg-gray-300">
             <FaHeart />
           </button>

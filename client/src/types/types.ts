@@ -11,6 +11,7 @@ export interface TVouchers {
   id: number;
   code: string;
   validity: number;
+  discount: number;
   status: string;
 }
 export interface TReservations {

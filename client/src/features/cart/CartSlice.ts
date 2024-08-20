@@ -29,11 +29,18 @@ const cartSlice = createSlice({
       //* first find the current item in the cart
       const item = state.cart.find((item) => item.id === action.payload);
       //*increase the items quqntity with each click
-      if (item) item.quantity++;
+      if (item) {
+        item.quantity++;
+        item.totalprice = item.quantity * item.totalprice;
+      }
     },
     decreaseItemQuantity(state, action) {
       const item = state.cart.find((item) => item.id === action.payload);
-      if (item) item.quantity--;
+      if (item) {
+        item.quantity--;
+      }
+      if (item?.quantity === 0)
+        cartSlice.caseReducers.deleteItem(state, action);
     },
     clearCart(state) {
       state.cart = [];

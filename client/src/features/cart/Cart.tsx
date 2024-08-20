@@ -10,12 +10,19 @@ const Cart = () => {
   const [code, setCode] = useState<string>("");
   const [applying, setApplying] = useState(false);
   const cart = useSelector(getCart);
+  console.log(cart);
   // const clear = useSelector(clearCart);
   const dispatch = useDispatch();
   const response = couponsAPI.useGetVoucherByCodeQuery({ code });
+  const [updateVoucher] = couponsAPI.useUpdateVoucherMutation();
   const Code = code.toString().toUpperCase();
 
-  const handleApplyCoupon = () => {
+  let totalPrice: any;
+  totalPrice = Number(
+    cart.reduce((sum, item) => sum + item.totalprice, 0) - 10
+  ).toFixed(2);
+
+  const handleApplyCoupon = async () => {
     setApplying(true);
     try {
       if (!code || code === "") {
@@ -27,12 +34,18 @@ const Cart = () => {
         toast.error("Coupon code must be at least 5 characters");
         return;
       }
-      console.log(response);
+
+      const id = response?.data?.id;
       if (response.isSuccess) {
-        toast.success("coupon found");
+        if (response.data.status === "used") {
+          return toast.warning("Coupon has already been used");
+        } else {
+          await updateVoucher({ id, status: "used" });
+          totalPrice = Number(totalPrice) - Number(response.data.discount); // Ensure totalPrice is a number
+          toast.success("Coupon code applied successfully");
+        }
       } else if (response.isError) {
         const error = response.error;
-
         if ("data" in error) {
           toast.error(error.data as string);
         } else {
@@ -99,12 +112,7 @@ const Cart = () => {
             </div>
             <div className="flex justify-between font-bold my-2">
               <span>Total:</span>
-              <span>
-                $
-                {(
-                  cart.reduce((sum, item) => sum + item.totalprice, 0) - 10
-                ).toFixed(2)}
-              </span>
+              <span>${totalPrice}</span>
             </div>
             <div className="my-4">
               <input

@@ -8,6 +8,7 @@ import couponsAPI from "../../apis/couponsAPI";
 
 const Cart = () => {
   const [code, setCode] = useState<string>("");
+  const [vDiscount, setVdiscount] = useState<number | undefined>(0);
   const [applying, setApplying] = useState(false);
   const cart = useSelector(getCart);
   console.log(cart);
@@ -15,12 +16,19 @@ const Cart = () => {
   const dispatch = useDispatch();
   const response = couponsAPI.useGetVoucherByCodeQuery({ code });
   const [updateVoucher] = couponsAPI.useUpdateVoucherMutation();
-  const Code = code.toString().toUpperCase();
+  // const Code = code.toString().toUpperCase();
 
   let totalPrice: any;
   totalPrice = Number(
     cart.reduce((sum, item) => sum + item.totalprice, 0) - 10
   ).toFixed(2);
+
+  const hasDiscount = Boolean(vDiscount);
+
+  const finalPrice = totalPrice - (vDiscount ?? 0);
+  console.log(finalPrice);
+
+  const final = hasDiscount ? finalPrice : totalPrice;
 
   const handleApplyCoupon = async () => {
     setApplying(true);
@@ -41,7 +49,7 @@ const Cart = () => {
           return toast.warning("Coupon has already been used");
         } else {
           await updateVoucher({ id, status: "used" });
-          totalPrice = Number(totalPrice) - Number(response.data.discount); // Ensure totalPrice is a number
+          setVdiscount(response.data.discount);
           toast.success("Coupon code applied successfully");
         }
       } else if (response.isError) {
@@ -61,6 +69,7 @@ const Cart = () => {
 
   const clearCartHandler = () => {
     dispatch(clearCart());
+    setVdiscount(0);
     toast.success("Cart cleared successfully");
   };
 
@@ -108,22 +117,23 @@ const Cart = () => {
             </div>
             <div className="flex justify-between my-2">
               <span>Discount:</span>
-              <span>$10.00</span>
+              <span>${vDiscount ?? 0}</span>
             </div>
             <div className="flex justify-between font-bold my-2">
               <span>Total:</span>
-              <span>${totalPrice}</span>
+              <span>${final}</span>
             </div>
             <div className="my-4">
               <input
                 type="text"
-                value={Code}
+                value={code}
                 placeholder="Coupon Code"
                 className="w-full p-3 border rounded-lg"
                 onChange={(e) => setCode(e.target.value)}
               />
               <button
-                className="w-full mt-2 bg-orange-500 text-white py-2 rounded-lg"
+                disabled={hasDiscount}
+                className="w-full mt-2 bg-orange-500 text-white py-2 rounded-lg disabled:bg-slate-500"
                 onClick={handleApplyCoupon}
               >
                 {applying ? "Hold on....." : "Apply"}

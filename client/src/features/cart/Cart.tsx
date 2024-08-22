@@ -128,12 +128,13 @@ const Cart = () => {
                 type="text"
                 value={code}
                 placeholder="Coupon Code"
-                className="w-full p-3 border rounded-lg"
+                className="w-full p-3 border rounded-lg disabled:cursor-not-allowed"
                 onChange={(e) => setCode(e.target.value)}
+                disabled={hasDiscount}
               />
               <button
                 disabled={hasDiscount}
-                className="w-full mt-2 bg-orange-500 text-white py-2 rounded-lg disabled:bg-slate-500"
+                className="w-full mt-2 bg-orange-500 text-white py-2 rounded-lg disabled:bg-slate-500 disabled:cursor-not-allowed"
                 onClick={handleApplyCoupon}
               >
                 {applying ? "Hold on....." : "Apply"}

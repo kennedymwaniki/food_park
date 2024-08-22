@@ -36,3 +36,11 @@ export interface TOrders {
 export interface TCode {
   code: string;
 }
+
+export interface User {
+  fullName: string;
+  password?: string;
+  email: string;
+  contactPhone: string;
+  address: string;
+}

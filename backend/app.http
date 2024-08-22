@@ -3,6 +3,20 @@ GET http://localhost:3000/api/orders
 
 ###
 GET http://localhost:3000/api/order/3
+###
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "total_price": 100,
+    "order_number": "GGHGHG%^&",
+    "quantity": 2,
+    "order_status": "pending",
+    "size": "medium",
+    "priority": true
+}
+
 
 
 //users

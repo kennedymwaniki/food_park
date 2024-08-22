@@ -10,6 +10,6 @@ import {
 export const orderRouter = new Hono();
 
 orderRouter.get("/orders", getOrders);
-orderRouter.get("/order/:id", getOrder);
-orderRouter.post("/order", createOrder);
-orderRouter.delete("/order/:id", createOrder);
+orderRouter.get("/orders/:id", getOrder);
+orderRouter.post("/orders", createOrder);
+orderRouter.delete("/orders/:id", createOrder);

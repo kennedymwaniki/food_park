@@ -1,4 +1,4 @@
-import {  eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { TIUser, TSUser, users } from "../drizzle/schema";
 
@@ -35,6 +35,17 @@ export const getAllUserRelationsService = async (id: number) => {
       fullname: true,
     },
     with: {
+      orders: {
+        columns: {
+          id: true,
+          order_number: true,
+          order_status: true,
+          priority: true,
+          quantity: true,
+          total_price: true,
+          size: true,
+        },
+      },
       comments: {
         columns: {
           id: true,

@@ -44,7 +44,7 @@ const HeroCarousel = () => {
   }, []);
 
   return (
-    <div className="relative w-screen h-full flex items-center justify-center py-2 md:py-4">
+    <div className="relative h-full flex items-center justify-center py-2 md:py-4">
       <div
         className="flex transition-transform duration-1000 w-full h-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -56,11 +56,11 @@ const HeroCarousel = () => {
           >
             <div className="flex flex-col md:flex-row items-center justify-between w-full gap-1 md:gap-0">
               <div className="w-full md:w-1/2 pr-0 md:pr-10 flex justify-center md:justify-end">
-                <div className="relative inline-block">
+                <div className="relative inline-block mt-12">
                   <img
                     src={slide.image}
                     alt={slide.title}
-                    className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[400px] md:h-[400px] object-cover rounded-full"
+                    className="w-[300px] h-[300px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] object-cover rounded-full"
                   />
                   <div className="absolute top-5 right-5 sm:top-10 sm:right-10 bg-orange-500 text-white font-bold px-3 py-1 sm:px-4 sm:py-2 rounded-full text-lg sm:text-2xl">
                     {slide.discount}

@@ -56,7 +56,7 @@ const menuData = [
     quantity: 1,
     title: "Mixed Fruit Bowl",
     category: "Salad",
-    price: 60.0,
+    price: 90,
     rating: 4.5,
     reviews: 120,
     image: menu5,
@@ -66,7 +66,7 @@ const menuData = [
     quantity: 1,
     title: "Italian Pasta",
     category: "Pasta",
-    price: 70,
+    price: 110,
     rating: 4,
     reviews: 514,
     image: menu6,
@@ -76,7 +76,17 @@ const menuData = [
     quantity: 1,
     title: "Italian Pasta",
     category: "Pasta",
-    price: 70,
+    price: 100,
+    rating: 4,
+    reviews: 514,
+    image: menu7,
+  },
+  {
+    id: 8,
+    quantity: 1,
+    title: "Italian Pasta",
+    category: "Pasta",
+    price: 95,
     rating: 4,
     reviews: 514,
     image: menu7,
@@ -85,7 +95,7 @@ const menuData = [
 
 const Menu = () => {
   return (
-    <div className="container mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="container mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {menuData.map((item, index) => (
         <MenuItem
           key={index}

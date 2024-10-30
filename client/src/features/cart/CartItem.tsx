@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import UpdateQuantity from "../../components/updateQuantity";
 import { CartItems } from "./CartSlice";
 
@@ -7,7 +7,7 @@ interface CartItemProps {
 }
 
 const CartItem = ({ item }: CartItemProps) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { id, quantity, title, price, totalprice, image } = item;
 
   // const totalprice = quantity * price;
